@@ -1,0 +1,154 @@
+Webaverse Tokenomics
+
+Goals
+
+- Reward participants first before speculators
+Hard to build a community when the main value driver is speculation
+Distribute tokens to people who build / create content today
+
+- Incentivize quality
+Governance is a content quality bar to maintain project health
+Route a large percentage of funds to content development
+Have a treasury for promotion
+
+- Be earnest
+- Inform the community about what is happening
+- No conflicts of interest: only members have a say, no proxy voting
+
+Structure
+
+Webaverse is a Delaware C-Corp, directed by a DAO. The DAO decides what the C-Corp does, and the company follows orders.
+
+Governance Activities
+
+The fungible token FLUX serves as the governance token in the DAO. The powers of the governance token are:
+- access to private worlds + weekly governance calls
+  - like a secret club
+- approve/reject neighborhood proposals for seasons
+  - like a zoning officer
+- approve/reject first-party nft proposals for seasons
+  - like a product scientist
+- approve/reject expansion of the team
+  - like a board room
+- approve/reject changing the token schedule
+  - like a town hall
+- propose future products / partnerships / business direction / platform features
+  - like an ambassador
+
+Season 0 Drop (now)
+
+We will mint 0.1% of the tokens for testing, put into a liquidity pool alongside 1 ETH.
+
+Season 1 Drop (in 10 weeks)
+
+- We work with artists to build out neighborhoods on the Street
+- Revenue target 32 ETH from sale of LANDs for S1 
+- Exponentially increasing number of plots allocated per season
+
+- We create and sell first-party NFT objects
+- Revenue target 10 ETH from sale of 100 NFTs for S1
+- A couple of types per season, with exponentially increasing mints
+
+People can decide how much FLUX they want to add to the pool after having atleast 1-2 community calls. Getting estimates from people will help us weigh how much supply / percentages, so we can hedge risk against dilution / slippage / dumps
+
+Token Schedule for Season 1+ (each ~10 weeks)
+
+Code for generating season schedules:
+
+```
+const totalFlux = 2 ** 31;
+
+const s1NumParcels = 32;
+const parcelsExponent = 0.05;
+const parcelPrice = 1;
+
+const s1NumNfts = 100;
+const nftsExponent = 0.15;
+const nftPrice = 0.1;
+
+let issuedFlux = 0;
+let remainingFlux = totalFlux;
+let totalParcels = 0;
+let totalNfts = 0;
+let revenue = 0;
+for (let i = 1; i <= 10; i++) {
+  const flux = Math.floor(remainingFlux * 0.1);
+  issuedFlux += flux;
+  remainingFlux -= flux;
+
+  const numParcels = Math.floor(s1NumParcels ** (1 + parcelsExponent * (i-1)));
+  totalParcels += numParcels;
+
+  const numNfts = Math.floor(s1NumNfts ** (1 + nftsExponent * (i-1)));
+  totalNfts += numNfts;
+
+  revenue += (numParcels * parcelPrice) + (numNfts * nftPrice);
+
+  console.log(`Season ${i}: ${flux} FLUX released (${(issuedFlux/totalFlux*100).toFixed(1)}% to date), ${numParcels}/${totalParcels} parcels this season, ${numNfts}/${totalNfts} nfts this season, ${revenue.toFixed(1)} ETH revenue to date`);
+}
+```
+
+FLUX has a cap of 2^31 = 2147483648, fungible to 18 decimal places.
+
+Each season, 10% of the remaining FLUX is distributed in a Season Drop, resulting in roughly this schedule:
+
+Season 1: 214748364 FLUX released (10.0% to date), 32/32 parcels this season, 100/100 nfts this season, 42.0 ETH revenue to date
+Season 2: 193273528 FLUX released (19.0% to date), 38/70 parcels this season, 199/299 nfts this season, 99.9 ETH revenue to date
+Season 3: 173946175 FLUX released (27.1% to date), 45/115 parcels this season, 398/697 nfts this season, 184.7 ETH revenue to date
+Season 4: 156551558 FLUX released (34.4% to date), 53/168 parcels this season, 794/1491 nfts this season, 317.1 ETH revenue to date
+Season 5: 140896402 FLUX released (41.0% to date), 63/231 parcels this season, 1584/3075 nfts this season, 538.5 ETH revenue to date
+Season 6: 126806762 FLUX released (46.9% to date), 76/307 parcels this season, 3162/6237 nfts this season, 930.7 ETH revenue to date
+Season 7: 114126085 FLUX released (52.2% to date), 90/397 parcels this season, 6309/12546 nfts this season, 1651.6 ETH revenue to date
+Season 8: 102713477 FLUX released (57.0% to date), 107/504 parcels this season, 12589/25135 nfts this season, 3017.5 ETH revenue to date
+Season 9: 92442129 FLUX released (61.3% to date), 127/631 parcels this season, 25118/50253 nfts this season, 5656.3 ETH revenue to date
+
+Schedule
+
+1. Weekly recurring calls for season one members to hangout, sync up, and talk business. Use https://lettucemeet.com/ to figure out best times.
+2. Start with S1 crypto artists building The Street, discuss ideas during weekly meetups
+3. Season 0 FLUX is the currency pre-season 1
+
+Consensus channels
+
+- Discord
+  - NFT Bot
+    - Integrate permission based channels via NFTs
+  - Community calls
+- Discourse
+- Snapshot.page
+
+
+
+
+Distribution methods
+
+- Liquidity pool
+    - 50% of ETH from LAND sales go into liquidity pool
+- Content development fund
+  - Paying artists that help develop the content for the season
+- Packing FLUX into genesis NFTs
+  - S1 members vote on how much FLUX gets packed proportionate to sales
+
+Promotion Ideas
+
+We propose 30% of the initial token supply go to these community led initiatives
+
+- M3 DAO
+  - Community events
+  - Virtual productions
+- rabbithole.gg partnership
+  - FLUX rewards for completing quests
+- reward value creation within Discord using https://sourcecred.io/ 
+$FLUX
+Flux = to flow (free flowing assets, items, value, etc)
+Also rhymes with “bucks”, good ring to it for a currency
+Flux in soldering - metaverse makers soldering different worlds together
+
+Futuristic / y2k look for the token: https://ak.picdn.net/shutterstock/videos/1054811189/preview/stock-footage-holographic-liquid-blobs-abstract-flowing-animation-k-abstract-background-loop-with-alpha-matte.webm
+
+
+Post launch
+
+- Establish consensus on the initial structure
+- Create Transak fund
+- Get token listed on coingecko / coinmarketcap / tip.cc
