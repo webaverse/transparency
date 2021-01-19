@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<body>
+<script>
+const totalFlux = 2 ** 31;
+
+const s1NumParcels = 32;
+const parcelsExponent = 0.05;
+const parcelPrice = 1;
+
+const s1NumNfts = 10;
+const nftsExponent = 0.15;
+const nftPrice = 0.1;
+
+let issuedFlux = 0;
+let remainingFlux = totalFlux;
+let totalParcels = 0;
+let totalNfts = 0;
+let revenue = 0;
+for (let i = 1; i <= 10; i++) {
+  const flux = Math.floor(remainingFlux * 0.1);
+  issuedFlux += flux;
+  remainingFlux -= flux;
+
+  const numParcels = Math.floor(s1NumParcels ** (1 + parcelsExponent * (i-1)));
+  totalParcels += numParcels;
+
+  const numNfts = Math.floor(s1NumNfts ** (1 + nftsExponent * (i-1)));
+  totalNfts += numNfts;
+
+  revenue += (numParcels * parcelPrice) + (numNfts * nftPrice);
+
+  console.log(`Season ${i}: ${flux} FLUX released (${(issuedFlux/totalFlux*100).toFixed(1)}% to date), ${numParcels}/${totalParcels} parcels this season, ${numNfts}/${totalNfts} nfts this season, ${revenue.toFixed(1)} ETH revenue to date`);
+}
+</script>
+</body>
+</html>
